@@ -11,24 +11,15 @@ export default function Tarea({ lista, tarea, deleteFromLista, contador }: Tarea
 
     return (
         <>
-            <section>
-                <h2>{lista.filter(t => t.semana === contador).length}</h2>
-                <aside className="calendar">
-                    <div className="day">
-                        <h3>
-                            {tarea.dia}
-                        </h3>
-                        <ul className="task-list">
-                            <li>
-                                {tarea.nombre}
-                                <button className="delete-button" onClick={() => deleteFromLista(tarea.id)}>
-                                    🗑️
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-            </section>
+
+
+            <li>
+                {tarea.nombre}
+                <button className="delete-button" onClick={() => deleteFromLista(tarea.id)}>
+                    🗑️
+                </button>
+            </li>
+
 
         </>
     )
