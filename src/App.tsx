@@ -1,40 +1,10 @@
-import type { tipoTarea } from "./types";
 import Formulario from './components/Formulario';
 import Tarea from './components/Tarea';
 import useTareas from "./hooks/useTareas";
-const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 function App() {
 
-
-
-  const { contador, setContador, lista, addToLista, deleteFromLista } = useTareas();
-
-  function anteriorSemana() {
-    const unoMenos = contador - 1;
-    if (unoMenos >= 1) {
-      setContador(unoMenos);
-    }
-
-  }
-
-  function siguienteSemana() {
-    const unoMas = contador + 1;
-    if (unoMas <= 52) {
-      setContador(unoMas);
-    }
-  }
-
-  function tareasPorDia(dia: tipoTarea['dia']) {
-    {
-      return lista
-        .filter((tarea) => tarea.semana === contador && tarea.dia === dia).length
-    }
-  }
-
-  function tareasPorSemana() {
-    { return lista.filter((tarea) => tarea.semana === contador).length }
-  }
+  const { diasSemana, contador, lista, addToLista, deleteFromLista, anteriorSemana, siguienteSemana, tareasPorDia, tareasPorSemana } = useTareas();
 
   return (
     <>

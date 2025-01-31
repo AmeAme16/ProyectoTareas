@@ -1,7 +1,6 @@
 import type { tipoTarea } from "../types";
 
 type TareaProps = {
-
     tarea: tipoTarea
     deleteFromLista: (id: tipoTarea["id"]) => void
 }
