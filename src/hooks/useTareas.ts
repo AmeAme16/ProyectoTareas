@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { tipoTarea } from "../types";
 
 function useTareas() {
+    const [contador, setContador] = useState(initialSemana());
 
     const [lista, setLista] = useState(initialLista());
 
@@ -10,11 +11,18 @@ function useTareas() {
         return localStorageTarea ? JSON.parse(localStorageTarea) : [];
     }
 
+    function initialSemana(): number {
+        const localStorageSemana = localStorage.getItem("semana");
+        return localStorageSemana ? JSON.parse(localStorageSemana) : 1;
+    }
+
     useEffect(() => {
-        if (lista.length > 0) {
-            localStorage.setItem("lista", JSON.stringify(lista));
-        }
+        localStorage.setItem("lista", JSON.stringify(lista));
     }, [lista]);
+
+    useEffect(() => {
+        localStorage.setItem("semana", JSON.stringify(contador));
+    }, [contador]);
 
     function addToLista(tarea: tipoTarea) {
         setLista(prevLista => [...prevLista, tarea]);
@@ -25,7 +33,7 @@ function useTareas() {
     }
 
     return {
-        lista, listaLength: lista.length, initialLista, addToLista, deleteFromLista
+        contador, setContador, lista, initialLista, addToLista, deleteFromLista
     }
 }
 

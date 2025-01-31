@@ -2,14 +2,13 @@ import type { tipoTarea } from "./types";
 import Formulario from './components/Formulario';
 import Tarea from './components/Tarea';
 import useTareas from "./hooks/useTareas";
-import { useState } from "react";
 const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
 function App() {
 
-  const [contador, setContador] = useState(1);
 
-  const { lista, addToLista, deleteFromLista, listaLength } = useTareas();
+
+  const { contador, setContador, lista, addToLista, deleteFromLista } = useTareas();
 
   function anteriorSemana() {
     const unoMenos = contador - 1;
@@ -33,6 +32,10 @@ function App() {
     }
   }
 
+  function tareasPorSemana() {
+    { return lista.filter((tarea) => tarea.semana === contador).length }
+  }
+
   return (
     <>
       <article className="container">
@@ -49,12 +52,13 @@ function App() {
         <Formulario
           semana={contador}
           addToLista={addToLista}
-          listaLength={listaLength}
         />
+        <h2>Total de tareas esta semana: {tareasPorSemana()}</h2>
         <section className="calendar">
+
           {diasSemana.map((dia) => (
             <div key={dia} className="day">
-              <h3>{dia} Número de tareas ({tareasPorDia(dia)})</h3>
+              <h3>{dia}  ({tareasPorDia(dia)} tareas)</h3>
               <ul className="task-list">
                 {lista
                   .filter((tarea) => tarea.semana === contador && tarea.dia === dia)
