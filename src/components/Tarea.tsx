@@ -1,26 +1,21 @@
 import type { tipoTarea } from "../types";
 
 type TareaProps = {
-    lista: tipoTarea[]
+
     tarea: tipoTarea
     deleteFromLista: (id: tipoTarea["id"]) => void
-    contador: number
 }
 
-export default function Tarea({ lista, tarea, deleteFromLista, contador }: TareaProps) {
+export default function Tarea({ tarea, deleteFromLista }: TareaProps) {
 
     return (
         <>
-
-
             <li>
                 {tarea.nombre}
                 <button className="delete-button" onClick={() => deleteFromLista(tarea.id)}>
                     🗑️
                 </button>
             </li>
-
-
         </>
     )
 }

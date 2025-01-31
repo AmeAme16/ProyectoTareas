@@ -17,9 +17,7 @@ function useTareas() {
     }, [lista]);
 
     function addToLista(tarea: tipoTarea) {
-        /* setLista([...lista, tarea]);*/
         setLista(prevLista => [...prevLista, tarea]);
-
     }
 
     function deleteFromLista(id: tipoTarea["id"]) {

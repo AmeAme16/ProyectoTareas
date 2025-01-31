@@ -5,12 +5,7 @@ import useTareas from "./hooks/useTareas";
 import { useState } from "react";
 const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
-type TareaProps = {
-  tarea: tipoTarea
-}
-
-
-function App({ tarea }: TareaProps) {
+function App() {
 
   const [contador, setContador] = useState(1);
 
@@ -29,7 +24,13 @@ function App({ tarea }: TareaProps) {
     if (unoMas <= 52) {
       setContador(unoMas);
     }
+  }
 
+  function tareasPorDia(dia: tipoTarea['dia']) {
+    {
+      return lista
+        .filter((tarea) => tarea.semana === contador && tarea.dia === dia).length
+    }
   }
 
   return (
@@ -53,7 +54,7 @@ function App({ tarea }: TareaProps) {
         <section className="calendar">
           {diasSemana.map((dia) => (
             <div key={dia} className="day">
-              <h3>{dia}</h3>
+              <h3>{dia} Número de tareas ({tareasPorDia(dia)})</h3>
               <ul className="task-list">
                 {lista
                   .filter((tarea) => tarea.semana === contador && tarea.dia === dia)
@@ -61,9 +62,7 @@ function App({ tarea }: TareaProps) {
                     <Tarea
                       key={tarea.id}
                       tarea={tarea}
-                      lista={lista}
                       deleteFromLista={deleteFromLista}
-                      contador={contador}
                     />
                   ))}
               </ul>
